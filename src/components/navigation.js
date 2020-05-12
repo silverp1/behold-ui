@@ -8,12 +8,8 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  Container
 } from 'reactstrap';
-import Avatar from 'react-avatar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -43,28 +39,17 @@ class Navigation extends Component {
     });
   }
 
-  showUserInformation() {
-    return (
-      <Nav className="ml-auto" navbar>
-        <NavItem>
-          <NavLink href="/login">Login</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink href="/register">Register</NavLink>
-        </NavItem>
-      </Nav>
-    )
-  }
-
   render() {
     return (
       <div>
         <Navbar color="light" light expand="md" className="mb-3">
-          <NavbarBrand href="/">Behold</NavbarBrand>
-          <NavbarToggler onClick={this.toggleOnClick} />
-          <Collapse isOpen={false} navbar>
-            {this.showUserInformation()}
-          </Collapse>
+          <Container>
+            <NavbarBrand href="/">
+              <img src="behold_logo.png" style={{ height: "20px"}}/>
+              <span className="pl-2">Behold</span>
+            </NavbarBrand>
+            <NavbarToggler onClick={this.toggleOnClick} />
+          </Container>
         </Navbar>
         <ToastContainer
           position="bottom-right"

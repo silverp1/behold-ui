@@ -8,7 +8,6 @@ import init from './pretender';
 import * as serviceWorker from './serviceWorker';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-calendar-heatmap/dist/styles.css';
 
 if (getCurrentEnvironment() === 'development') {
   init();

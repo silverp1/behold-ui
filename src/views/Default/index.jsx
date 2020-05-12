@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Navigation from '../../components/navigation';
+import Glance from '../../components/glance';
+import CheckTable from '../../components/CheckTable';
 import { getAllChecks } from '../../features/checks/actions';
 import { pushAlert, popAlert } from '../../features/alerts/actions';
 import showAlert from '../../util/alerts';
@@ -27,6 +29,7 @@ class Default extends Component {
   }
 
   async componentDidMount() {
+    await this.props.getAllChecks();
     showAlert(this.props.alerts);
     this.props.popAlert();
   }
@@ -40,7 +43,12 @@ class Default extends Component {
     return (
       <div>
         <Navigation />
-        <Container>
+        <Container className="mb-5">
+          <Glance />
+          <CheckTable />
+          <Button color="primary" href="/check/create">
+            Create Check
+          </Button>
         </Container>
       </div>
     )
