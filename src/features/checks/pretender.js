@@ -1,4 +1,40 @@
 export default function() {
+  this.get(
+    '/api/v1/check/:id',
+    request => [
+      200,
+      { 'Content-Type': 'application/json' },
+      JSON.stringify({
+        "check": {
+            "value": null,
+            "updated_at": "2020-05-14T05:31:39",
+            "type": "ping",
+            "target": "8.8.8.8",
+            "state": "nominal",
+            "operation": null,
+            "name": "Google Check",
+            "last_alerted_for": "critical",
+            "interval": 60000,
+            "inserted_at": "2020-05-03T02:12:55",
+            "id": 9,
+            "comparison": null,
+            "alerts": [
+              {
+                  "updated_at": "2020-05-14T05:31:39",
+                  "type": "email",
+                  "target": "me@mydomain.com",
+                  "last_sent": "2020-05-14T05:31:39Z",
+                  "interval": 60000,
+                  "inserted_at": "2020-05-06T02:19:42",
+                  "id": 1,
+                  "check_id": 9
+              }
+            ]
+          }
+        }
+      )
+    ]
+  )
   this.post(
     '/api/v1/check',
     request => [

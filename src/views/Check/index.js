@@ -23,8 +23,8 @@ class Check extends Component {
     }
   }
 
-  componentDidMount() {
-
+ async componentDidMount() {
+    await this.props.getCheck(this.state.checkId);
   }
 
   render() {
@@ -32,7 +32,7 @@ class Check extends Component {
       <div>
         <Navigation />
         <Container>
-          <StatusBar status="critical" />
+          <StatusBar status={this.props.check.state} />
         </Container>
       </div>
     )

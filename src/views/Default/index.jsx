@@ -16,18 +16,6 @@ import {
 } from 'reactstrap';
 
 class Default extends Component {
-  constructor(props) {
-    super(props);
-
-    this.popAlert = this.popAlert.bind(this);
-  }
-
-  popAlert() {
-    this.props.pushAlert(['success', 'ohboy']);
-    showAlert(this.props.alerts);
-    this.props.popAlert();
-  }
-
   async componentDidMount() {
     await this.props.getAllChecks();
     showAlert(this.props.alerts);

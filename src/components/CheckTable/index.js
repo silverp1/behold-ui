@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {
   Row,
   Container,
-  Table
+  Table,
 } from 'reactstrap';
 
 class CheckTable extends Component {
@@ -14,7 +14,6 @@ class CheckTable extends Component {
   }
 
   buildChecks() {
-    console.log(this.props);
     let val = this.props.checks.forEach(check => {
       return (
         <tr>
@@ -25,7 +24,6 @@ class CheckTable extends Component {
         </tr>
       )
     })
-    console.log(val);
     return val;
   }
 
@@ -49,7 +47,7 @@ class CheckTable extends Component {
                 {this.props.checks.map((value, index) => {
                   return (
                     <tr key={index}>
-                      <td>{value.name}</td>
+                      <td><a href={`/check/${value.id}`}>{value.name}</a></td>
                       <td>{value.state}</td>
                       <td>{value.type}</td>
                       <td>{value.target}</td>

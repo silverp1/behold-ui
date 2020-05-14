@@ -1,4 +1,8 @@
-import { allChecksRequest, doCreateCheckRequest } from './util'
+import { 
+  allChecksRequest, 
+  doCreateCheckRequest,
+  doGetCheckRequest,
+} from './util'
 import { possiblyParseInt } from '../../util/general';
 
 export const GET_ALL_CHECKS_REQUEST = 'getAllChecksRequest';
@@ -9,8 +13,40 @@ export const CREATE_CHECK_REQUEST = 'createCheckRequest';
 export const CREATE_CHECK_SUCCESS = 'createCheckSuccess';
 export const CREATE_CHECK_ERROR = 'createCheckError';
 
+export const GET_CHECK_REQUEST = 'getCheckRequest';
+export const GET_CHECK_SUCCESS = 'getCheckSuccess';
+export const GET_CHECK_ERROR = 'getCheckError';
+
+export function getCheckRequest() {
+  return {
+    type: GET_CHECK_REQUEST
+  };
+}
+
+export function getCheckSuccess(data) {
+  return {
+    type: GET_CHECK_SUCCESS,
+    payload: data
+  };
+}
+
+export function getCheckError(error) {
+  return {
+    type: GET_CHECK_ERROR,
+    error: error
+  }
+}
+
 export function getCheck(checkId) {
-  return;
+  return async (dispatch) => {
+    try {
+      dispatch(getCheckRequest());
+      const result = await doGetCheckRequest(checkId);
+      dispatch(getCheckSuccess(result.data));
+    } catch (e) {
+      dispatch(getCheckError(e));
+    }
+  }
 }
 
 export function createCheckRequest() {
