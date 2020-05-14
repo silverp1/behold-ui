@@ -6,3 +6,21 @@ export const allChecksRequest = async () => axios({
   baseURL: config.BASE_PATH,
   url: 'api/v1/checks'
 });
+
+export const doCreateCheckRequest = async (
+  name, type, target, value, 
+  comparison, operation, interval
+) => axios({
+  method: 'POST',
+  baseURL: config.BASE_PATH,
+  url: 'api/v1/check',
+  data: {
+    name,
+    type,
+    target,
+    value,
+    comparison,
+    operation,
+    interval
+  }
+});

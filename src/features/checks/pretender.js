@@ -1,4 +1,13 @@
 export default function() {
+  this.post(
+    '/api/v1/check',
+    request => [
+      200,
+      { 'Content-Type': 'application/json' },
+      JSON.stringify({ "message": "check created successfully"})
+    ]
+  )
+
   this.get(
     '/api/v1/checks',
     request => [

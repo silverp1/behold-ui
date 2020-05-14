@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
   Container
 } from 'reactstrap';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import Logo from './behold_logo.png';
 
 class Navigation extends Component {
   constructor(props) {
@@ -45,7 +43,7 @@ class Navigation extends Component {
         <Navbar color="light" light expand="md" className="mb-3">
           <Container>
             <NavbarBrand href="/">
-              <img src="behold_logo.png" style={{ height: "20px"}}/>
+              <img src={Logo} alt="Logo" style={{ height: "20px" }}/>
               <span className="pl-2">Behold</span>
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleOnClick} />
@@ -60,7 +58,7 @@ class Navigation extends Component {
           rtl={false}
           pauseOnVisibilityChange
           draggable
-          pauseOnHover
+          pauseOnHover 
         />
       </div>
     )
