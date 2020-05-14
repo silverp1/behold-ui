@@ -8,11 +8,7 @@ import { pushAlert, popAlert } from '../../features/alerts/actions';
 import showAlert from '../../util/alerts';
 import {
   Button,
-  Container,
-  Card,
-  CardBody,
-  CardTitle,
-  CardText
+  Container
 } from 'reactstrap';
 
 class Default extends Component {
