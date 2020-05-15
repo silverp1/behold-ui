@@ -111,7 +111,6 @@ class CreateCheck extends Component {
   }
 
   render() {
-    console.log("hi");
     return (
       <div>
         <Navigation />
