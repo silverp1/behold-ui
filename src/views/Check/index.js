@@ -2,30 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Navigation from '../../components/navigation';
 import StatusBar from '../../components/StatusBar';
-import { getCheck } from '../../features/checks/actions';
+import { getCheck, getCheckValues } from '../../features/checks/actions';
 import { pushAlert, popAlert } from '../../features/alerts/actions';
+import { formatDate } from '../../util/general';
 import showAlert from '../../util/alerts';
 import {
   Button,
   Container,
-  Table,
-  Card,
-  CardBody,
-  CardTitle,
-  CardText
+  Table
 } from 'reactstrap';
 
 class Check extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      checkId: 0
+    let checkId = 0;
+
+    if (!isNaN(parseInt(this.props.match.params.checkId))) {
+      checkId = parseInt(this.props.match.params.checkId)
     }
+
+    this.checkId = checkId
   }
 
  async componentDidMount() {
-    await this.props.getCheck(this.state.checkId);
+    await this.props.getCheck(this.checkId);
+    await this.props.getCheckValues(this.checkId);
   }
 
   render() {
@@ -68,7 +70,7 @@ class Check extends Component {
                     <td>{value.type}</td>
                     <td>{value.target}</td>
                     <td>{value.interval}</td>
-                    <td>{value.last_sent}</td>
+                    <td>{formatDate(value.last_sent)}</td>
                     <td>
                       <a className="btn btn-primary btn-sm" href={`/notification/${value.id}/edit`}>Edit</a>
                       <a className="btn btn-danger btn-sm ml-1" href={`/notification/${value.id}/delete`}>Delete</a>
@@ -81,6 +83,25 @@ class Check extends Component {
           <div className="mb-4">
             <Button href={`/check/${this.props.check.id}/notification/create`} color="primary">Create notification</Button>
           </div>
+          <h3>Check Results</h3>
+          <Table>
+            <thead>
+              <tr>
+                <th>Result</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+            {this.props.values && this.props.values.map((value, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{value.value}</td>
+                    <td>{formatDate(value.updated_at)}</td>
+                  </tr>
+                )
+              })} 
+            </tbody>
+          </Table>
         </Container>
       </div>
     )
@@ -90,12 +111,13 @@ class Check extends Component {
 const mapStateToProps = state => ({
   check: state.checksReducer.check,
   error: state.checksReducer.error,
-  //values: state.valuesReducer.values,
+  values: state.checksReducer.values,
   //notifications: state.notificationsReducer.notifications
 });
 
 const mapActionsToProps = {
   getCheck,
+  getCheckValues,
   pushAlert,
   popAlert,
   showAlert

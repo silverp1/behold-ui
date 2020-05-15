@@ -2,6 +2,7 @@ import {
   allChecksRequest, 
   doCreateCheckRequest,
   doGetCheckRequest,
+  doGetCheckValuesRequest
 } from './util'
 import { possiblyParseInt } from '../../util/general';
 
@@ -16,6 +17,42 @@ export const CREATE_CHECK_ERROR = 'createCheckError';
 export const GET_CHECK_REQUEST = 'getCheckRequest';
 export const GET_CHECK_SUCCESS = 'getCheckSuccess';
 export const GET_CHECK_ERROR = 'getCheckError';
+
+export const GET_CHECK_VALUES_REQUEST = 'getCheckValuesRequest';
+export const GET_CHECK_VALUES_SUCCESS = 'getCheckValuesSuccess';
+export const GET_CHECK_VALUES_ERROR = 'getCheckValueError';
+
+export function getCheckValuesRequest() {
+  return {
+    type: GET_CHECK_VALUES_REQUEST
+  };
+}
+
+export function getCheckValuesSuccess(data) {
+  return {
+    type: GET_CHECK_VALUES_SUCCESS,
+    payload: data
+  };
+}
+
+export function getCheckValuesError(error) {
+  return {
+    type: GET_CHECK_VALUES_ERROR,
+    error: error
+  }
+}
+
+export function getCheckValues(checkId) {
+  return async (dispatch) => {
+    try {
+      dispatch(getCheckValuesRequest());
+      const result = await doGetCheckValuesRequest(checkId);
+      dispatch(getCheckValuesSuccess(result.data));
+    } catch (e) {
+      dispatch(getCheckValuesError(e));
+    }
+  }
+}
 
 export function getCheckRequest() {
   return {

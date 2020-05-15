@@ -1,5 +1,87 @@
 export default function() {
   this.get(
+    '/api/v1/check/:id/values',
+    request => [
+      200,
+      { 'Content-Type': 'application/json' },
+      JSON.stringify({
+        "values": [
+            {
+                "value": "nominal",
+                "updated_at": "2020-05-10T02:22:01",
+                "inserted_at": "2020-05-10T02:22:01",
+                "id": 15150,
+                "check_id": 9
+            },
+            {
+                "value": "nominal",
+                "updated_at": "2020-05-10T02:22:25",
+                "inserted_at": "2020-05-10T02:22:25",
+                "id": 15159,
+                "check_id": 9
+            },
+            {
+                "value": "nominal",
+                "updated_at": "2020-05-10T02:22:55",
+                "inserted_at": "2020-05-10T02:22:55",
+                "id": 15168,
+                "check_id": 9
+            },
+            {
+                "value": "nominal",
+                "updated_at": "2020-05-10T02:24:26",
+                "inserted_at": "2020-05-10T02:24:26",
+                "id": 15200,
+                "check_id": 9
+            },
+            {
+                "value": "nominal",
+                "updated_at": "2020-05-10T02:26:45",
+                "inserted_at": "2020-05-10T02:26:45",
+                "id": 15248,
+                "check_id": 9
+            },
+            {
+                "value": "nominal",
+                "updated_at": "2020-05-10T02:26:57",
+                "inserted_at": "2020-05-10T02:26:57",
+                "id": 15252,
+                "check_id": 9
+            },
+            {
+                "value": "nominal",
+                "updated_at": "2020-05-10T02:28:03",
+                "inserted_at": "2020-05-10T02:28:03",
+                "id": 15275,
+                "check_id": 9
+            },
+            {
+                "value": "nominal",
+                "updated_at": "2020-05-10T02:28:33",
+                "inserted_at": "2020-05-10T02:28:33",
+                "id": 15286,
+                "check_id": 9
+            },
+            {
+                "value": "nominal",
+                "updated_at": "2020-05-10T02:29:46",
+                "inserted_at": "2020-05-10T02:29:46",
+                "id": 15311,
+                "check_id": 9
+            },
+            {
+                "value": "nominal",
+                "updated_at": "2020-05-10T02:29:52",
+                "inserted_at": "2020-05-10T02:29:52",
+                "id": 15314,
+                "check_id": 9
+            }
+        ]
+      })
+    ]
+  )
+  
+  this.get(
     '/api/v1/check/:id',
     request => [
       200,

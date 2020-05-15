@@ -7,7 +7,10 @@ import {
   CREATE_CHECK_ERROR,
   GET_CHECK_REQUEST,
   GET_CHECK_SUCCESS,
-  GET_CHECK_ERROR
+  GET_CHECK_ERROR,
+  GET_CHECK_VALUES_REQUEST,
+  GET_CHECK_VALUES_SUCCESS,
+  GET_CHECK_VALUES_ERROR
 } from './actions';
 
 export default function checksReducer(
@@ -15,11 +18,13 @@ export default function checksReducer(
     isFetching: false,
     checks: [],
     check: {},
+    values: [],
     error: null
   },
   action
 ) {
   switch(action.type) {
+    case GET_CHECK_VALUES_REQUEST:
     case GET_CHECK_REQUEST:
     case CREATE_CHECK_REQUEST:
     case GET_ALL_CHECKS_REQUEST:
@@ -33,7 +38,7 @@ export default function checksReducer(
         ...state,
         isFetching: false,
         message: action.payload.message
-      }
+      };
     case GET_ALL_CHECKS_SUCCESS:
       return {
         ...state,
@@ -45,10 +50,17 @@ export default function checksReducer(
         ...state,
         isFetching: false,
         check: action.payload.check
-      }
+      };
+    case GET_CHECK_VALUES_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        values: action.payload.values
+      };
     case GET_CHECK_ERROR:
     case CREATE_CHECK_ERROR:
     case GET_ALL_CHECKS_ERROR:
+    case GET_CHECK_VALUES_ERROR:
       return {
         ...state,
         isFetching: false,

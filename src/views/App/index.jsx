@@ -12,15 +12,9 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/check/create">
-          <CreateCheck />
-        </Route>
-        <Route path="/check/:checkId">
-          <Check />
-        </Route>
-        <Route path="/">
-          <Default />
-        </Route>
+        <Route exact path="/check/create" component={CreateCheck} />
+        <Route exact path="/check/:checkId" component={Check} />
+        <Route exact path="/" component={Default} />
       </Switch>
     </Router>
   )
