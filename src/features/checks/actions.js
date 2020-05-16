@@ -4,7 +4,6 @@ import {
   doGetCheckRequest,
   doGetCheckValuesRequest
 } from './util'
-import { possiblyParseInt } from '../../util/general';
 
 export const GET_ALL_CHECKS_REQUEST = 'getAllChecksRequest';
 export const GET_ALL_CHECKS_SUCCESS = 'getAllChecksSuccess';
@@ -114,7 +113,7 @@ export function createCheck(
     try {
       dispatch(createCheckRequest());
       const result = await doCreateCheckRequest(
-        name, type, target, possiblyParseInt(value),
+        name, type, target, value,
         comparison, operation, parseInt(interval)
       );
       dispatch(createCheckSuccess(result.data));

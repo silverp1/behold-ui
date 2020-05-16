@@ -8,8 +8,12 @@ import { formatDate } from '../../util/general';
 import showAlert from '../../util/alerts';
 import {
   Button,
+  Row,
+  Col,
   Container,
-  Table
+  Table,
+  ListGroup,
+  ListGroupItem
 } from 'reactstrap';
 
 class Check extends Component {
@@ -37,20 +41,34 @@ class Check extends Component {
         <Container>
           <StatusBar status={this.props.check.state} />
           <h3>{this.props.check.name}</h3>
-          <Table>
-            <thead>
-              <tr>
-                <th>Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{this.props.check.name}</td>
-              </tr>
-            </tbody>
-          </Table>
+          <Row className="mb-3">
+            <Col>
+              <ListGroup>
+                <ListGroupItem>
+                  <strong>Name</strong>
+                  <span className="float-right">{this.props.check.name}</span>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <strong>Target</strong>
+                  <span className="float-right">{this.props.check.target}</span>
+                </ListGroupItem>
+              </ListGroup>
+            </Col>
+            <Col>
+            <ListGroup>
+                <ListGroupItem>
+                  <strong>Type</strong>
+                  <span className="float-right">{this.props.check.type}</span>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <strong>Last Check</strong>
+                  <span className="float-right">{formatDate(this.props.check.updated_at)}</span>
+                </ListGroupItem>
+              </ListGroup>
+            </Col>
+          </Row>
           <div className="mb-4">
-            <Button href={`/check/${this.props.check.id}/edit`} color="primary">Edit check</Button>
+            <Button color="danger">Delete check</Button>
           </div>
           <h3>Notifications</h3>
           <Table>
@@ -72,7 +90,6 @@ class Check extends Component {
                     <td>{value.interval}</td>
                     <td>{formatDate(value.last_sent)}</td>
                     <td>
-                      <a className="btn btn-primary btn-sm" href={`/notification/${value.id}/edit`}>Edit</a>
                       <a className="btn btn-danger btn-sm ml-1" href={`/notification/${value.id}/delete`}>Delete</a>
                     </td>
                   </tr>

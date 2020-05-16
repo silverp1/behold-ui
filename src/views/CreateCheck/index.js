@@ -49,7 +49,7 @@ class CreateCheck extends Component {
 
     // DOM is changed based on type selection
     // meaning sometimes the indices are different
-    if (e.target.length === 7) {
+    if (e.target.length === 8) {
       comparison = e.target[4].value;
       operation = e.target[5].value;
       interval = e.target[6].value;
@@ -92,7 +92,7 @@ class CreateCheck extends Component {
               <Label for="operation">Operation</Label>
               <Input type="select" name="operation" id="operation">
                 <option value="greater_than">Greater Than</option>
-                <option value="greater_than_equal_to">Greater than or equal to</option>
+                <option value="greater_than_or_equal_to">Greater than or equal to</option>
                 <option value="less_than">Less than</option>
                 <option value="less_than_or_equal_to">Less than or equal to</option>
                 <option value="equal_to">Equal to</option>
