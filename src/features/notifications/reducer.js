@@ -23,7 +23,7 @@ export default function notificationsReducer(
       return {
         ...state,
         isFetching: false,
-        error: action.payload.message
+        error: action.message
       };
     case CREATE_NOTIFICATION_SUCCESS: 
       return {

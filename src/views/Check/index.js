@@ -6,6 +6,8 @@ import { getCheck, getCheckValues } from '../../features/checks/actions';
 import { pushAlert, popAlert } from '../../features/alerts/actions';
 import { formatDate } from '../../util/general';
 import showAlert from '../../util/alerts';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import {
   Button,
   Row,
@@ -34,6 +36,14 @@ class Check extends Component {
     await this.props.getCheckValues(this.checkId);
   }
 
+  getProcessIcon(process_status) {
+    if (process_status === true) {
+      return (<FontAwesomeIcon className="text-success" icon={faCheck} />)
+    } else {
+      return (<FontAwesomeIcon className="text-danger" icon={faTimes} />)
+    }
+  }
+
   render() {
     return (
       <div>
@@ -52,6 +62,16 @@ class Check extends Component {
                   <strong>Target</strong>
                   <span className="float-right">{this.props.check.target}</span>
                 </ListGroupItem>
+                <ListGroupItem>
+                  <strong>State</strong>
+                  <span className="float-right">{this.props.check.state}</span>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <strong>Check Process Status</strong>
+                  <span className="float-right">
+                    {this.props.check.processes ? this.getProcessIcon(this.props.check.processes.check_running) : "Unknown"}
+                  </span>
+                </ListGroupItem>
               </ListGroup>
             </Col>
             <Col>
@@ -63,6 +83,16 @@ class Check extends Component {
                 <ListGroupItem>
                   <strong>Last Check</strong>
                   <span className="float-right">{formatDate(this.props.check.updated_at)}</span>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <strong>Check Created</strong>
+                  <span className="float-right">{formatDate(this.props.check.inserted_at)}</span>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <strong>Rollup Process Status</strong>
+                  <span className="float-right">
+                    {this.props.check.processes ? this.getProcessIcon(this.props.check.processes.rollup_running) : "Unknown"}
+                  </span>
                 </ListGroupItem>
               </ListGroup>
             </Col>
@@ -105,6 +135,7 @@ class Check extends Component {
             <thead>
               <tr>
                 <th>Result</th>
+                <th>Returned Value</th>
                 <th>Date</th>
               </tr>
             </thead>
@@ -113,6 +144,7 @@ class Check extends Component {
                 return (
                   <tr key={index}>
                     <td>{value.value}</td>
+                    <td>{value.returned_value}</td>
                     <td>{formatDate(value.updated_at)}</td>
                   </tr>
                 )
