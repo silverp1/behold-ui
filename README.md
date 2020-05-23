@@ -1,70 +1,30 @@
-# Behold-UI
+# behold-ui
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+behold-ui is a react application frontend for the [behold](https://github.com/silverp1/behold) monitoring application.
 
-## Available Scripts
+## Run it locally
 
-In the project directory, you can run:
+To run this locally, start it like you would any react application:
 
-### `npm start`
+`npm install`
+`npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+You should now see the application running on port 3000. This application will run using pretender if you don't specify a non-development environment. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Use a real instance of behold
 
-### `npm test`
+You can change to production and, in that mode, you can also specify the `API_URL` to your behold instance:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`NODE_ENV=production API_URL=localhost:4000/ npm start`
 
-### `npm run build`
+## Run it for real
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This is meant to be run in a Docker container, but you can really do whatever you want with it (including building it and serving it up on your web server). 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Run it in Docker
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Update the Dockerfile to reference your local `API_URL`
+2. `docker build .`
+3. `docker run --restart=always --name="behold-ui" -p 3001:3000 YOUR_IMAGE_NAME`
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The application will now be accessible from the IP of the machine you started the container on at port 3001 (this can be changed by swapping the 3001 in the above command to any port you want). 
