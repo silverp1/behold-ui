@@ -132,6 +132,7 @@ class CreateCheck extends Component {
                     <option value="http_json">JSON (Validate key exists)</option>
                     <option value="http_json_comparison">JSON (Validate key with logic)</option>
                     <option value="http_comparison">HTTP (Validate body response)</option>
+                    <option value="dns">DNS</option>
                   </Input>
                 </FormGroup>
                 <FormGroup>

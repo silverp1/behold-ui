@@ -8,7 +8,7 @@ if(getCurrentEnvironment() === 'development') {
   }
 } else {
   config = {
-    BASE_PATH: 'http://localhost:4040',
+    BASE_PATH: process.env.API_URL,
     DATE_FORMAT: 'MM-DD-YY hh:mm:ss'
   }
 }

@@ -47,7 +47,7 @@ class CheckTable extends Component {
                 {this.props.checks.map((value, index) => {
                   return (
                     <tr key={index}>
-                      <td><a href={`/check/${value.id}`}>{value.name}</a></td>
+                      <td><a href={`/check/${value.id}`}>{value.name || value.id}</a></td>
                       <td>{value.state}</td>
                       <td>{value.type}</td>
                       <td>{value.target}</td>
