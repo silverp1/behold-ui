@@ -7,6 +7,8 @@ import {
   Col,
   Table
 } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSync } from '@fortawesome/free-solid-svg-icons'
 import './health.css';
 
 class Health extends Component {
@@ -103,7 +105,11 @@ class Health extends Component {
                     <tr key={index}>
                     <td>{value.name || value.id}</td>
                     <td>{value.status}</td>
-                    <td><a href={`/health/${value.name}/restart`}>Restart</a></td>
+                    <td>
+                      <a href={`/health/${value.name}/restart`}>
+                        <FontAwesomeIcon icon={faSync} />
+                      </a>
+                    </td>
                   </tr>
                   )
                 })
@@ -129,7 +135,11 @@ class Health extends Component {
                     <tr key={index}>
                     <td>{value.name || value.id}</td>
                     <td>{value.status}</td>
-                    <td><a href={`/health/${value.name}/restart`}>Restart</a></td>
+                    <td>
+                      <a href={`/health/${value.name}/restart`}>
+                        <FontAwesomeIcon icon={faSync} />
+                      </a>
+                    </td>
                   </tr>
                   )
                 })
