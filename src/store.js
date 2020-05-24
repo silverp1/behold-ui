@@ -6,13 +6,15 @@ import {
 import checksReducer from './features/checks/reducer';
 import alertsReducer from './features/alerts/reducer';
 import notificationsReducer from './features/notifications/reducer';
+import healthReducer from './features/health/reducer';
 
 
 const allReducers = combineReducers({
   checksReducer,
   alertsReducer,
-  notificationsReducer
-})
+  notificationsReducer,
+  healthReducer
+});
 
 let allStoreEnhancers = compose(
   applyMiddleware(thunk)
