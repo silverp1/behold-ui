@@ -10,7 +10,9 @@ class CheckTable extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      sortedData: null
+    };
   }
 
   buildChecks() {
@@ -27,7 +29,14 @@ class CheckTable extends Component {
     return val;
   }
 
+  sortData(column) {
+    const sortedData = this.state.sortedData || this.props.checks;
+    sortedData.sort((a,b) => a[column].localeCompare(b[column]))
+    this.setState({sortedData})
+  }
+
   render() {
+    const tableData = this.state.sortedData || this.props.checks;
     return (
       <div>
         <Container>
@@ -36,15 +45,15 @@ class CheckTable extends Component {
             <Table className="mt-1 mb-3">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Current Status</th>
-                  <th>Type</th>
-                  <th>Target</th>
-                  <th>Last Checked</th>
+                  <th onClick={() => this.sortData('name')}>Name</th>
+                  <th onClick={() => this.sortData('state')}>Current Status</th>
+                  <th onClick={() => this.sortData('type')}>Type</th>
+                  <th onClick={() => this.sortData('target')}>Target</th>
+                  <th onClick={() => this.sortData('updated_at')}>Last Checked</th>
                 </tr>
               </thead>
               <tbody>
-                {this.props.checks.map((value, index) => {
+                {tableData.map((value, index) => {
                   return (
                     <tr key={index}>
                       <td><a href={`/check/${value.id}`}>{value.name || value.id}</a></td>
