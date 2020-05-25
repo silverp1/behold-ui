@@ -15,13 +15,13 @@ function popAlertRequest() {
 }
 
 export function pushAlert(alert) {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(pushAlertRequest(alert));
   };
 }
 
 export function popAlert() {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(popAlertRequest());
   }
 }

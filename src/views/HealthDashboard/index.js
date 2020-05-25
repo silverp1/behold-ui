@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Navigation from '../../components/navigation';
 import Health from '../../components/Health';
+import Loading from '../../components/Loading';
 import { getHealthData } from '../../features/health/actions';
-import { pushAlert, popAlert } from '../../features/alerts/actions';
-import showAlert from '../../util/alerts';
-import {
-  Container
-} from 'reactstrap';
 
 class HealthDashboard extends Component {
   constructor(props) {
@@ -24,9 +20,10 @@ class HealthDashboard extends Component {
     return (
       <div>
         <Navigation />
-        <Container>
-          <Health />
-        </Container>
+        {this.props.isFetching
+          ? <Loading />
+          : <Health />
+        }
       </div>
     )
   }

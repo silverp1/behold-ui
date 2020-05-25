@@ -1,4 +1,15 @@
 export default function() {
+  this.post(
+    '/api/v1/health/restart',
+    request => [
+      200,
+      { 'Content-Type': 'application/json' },
+      JSON.stringify({
+        message: "restart successfully issued"
+      })
+    ]
+  )
+
   this.get(
     '/api/v1/health',
     request => [

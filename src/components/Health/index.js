@@ -5,13 +5,23 @@ import {
   CardBody,
   Row,
   Col,
-  Table
+  Table,
+  Container
 } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSync } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSync } from '@fortawesome/free-solid-svg-icons';
+import { restartProcess } from '../../features/health/actions';
+import { capitalize } from '../../util/general';
+import { pushAlert, popAlert } from '../../features/alerts/actions';
+import showAlert from '../../util/alerts';
 import './health.css';
 
 class Health extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleRestart = this.handleRestart.bind(this);
+  }
   getCardClassName(check) {
     if (check && check.all_alive === true) {
       return 'text-white bg-success'
@@ -79,76 +89,88 @@ class Health extends Component {
     }
   }
 
+  async handleRestart(e) {
+    await this.props.restartProcess(e.target.value);
+    if (!this.props.error) {
+      this.props.pushAlert(['success', 'Process restart request made successfully']);
+    } else {
+      this.props.pushAlert(['danger', 'Process restart request failed.']);
+    }
+    showAlert(this.props.alerts);
+    this.props.popAlert();
+  }
+
   render() {
-    console.log(this.props);
     return (
-      <div>
+      <Container>
         <Row>
           {this.showHealthCardChecks()}
           {this.showHealthCardRollup()}
           {this.showHealthCardScheduler()}
         </Row>
-        <Row className="mt-4">
-          <h3>Checks</h3>
-          <Table>
-            <thead>
-              <tr>
-                <th>Process</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.healthData && this.props.healthData.check_processes
-                ? this.props.healthData.check_processes.process_data.map((value, index) => {
-                  return (
-                    <tr key={index}>
-                    <td>{value.name || value.id}</td>
-                    <td>{value.status}</td>
-                    <td>
-                      <a href={`/health/${value.name}/restart`}>
-                        <FontAwesomeIcon icon={faSync} />
-                      </a>
-                    </td>
-                  </tr>
-                  )
-                })
-                : ('')
-              }
-            </tbody>
-          </Table>
-        </Row>
-        <Row className="mt-2">
-          <h3>Rollups</h3>
-          <Table>
-            <thead>
-              <tr>
-                <th>Process</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.props.healthData && this.props.healthData.rollup_processes
-                ? this.props.healthData.rollup_processes.process_data.map((value, index) => {
-                  return (
-                    <tr key={index}>
-                    <td>{value.name || value.id}</td>
-                    <td>{value.status}</td>
-                    <td>
-                      <a href={`/health/${value.name}/restart`}>
-                        <FontAwesomeIcon icon={faSync} />
-                      </a>
-                    </td>
-                  </tr>
-                  )
-                })
-                : ('')
-              }
-            </tbody>
-          </Table>
-        </Row>
-     </div>
+        <Container>
+          <Row className="mt-4">
+            <h3>Checks</h3>
+            <Table>
+              <thead>
+                <tr>
+                  <th className="process-row">Process</th>
+                  <th className="status-row">Status</th>
+                  <th className="actions-row">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.props.healthData && this.props.healthData.check_processes
+                  ? this.props.healthData.check_processes.process_data.map((value, index) => {
+                    return (
+                      <tr key={index}>
+                      <td>{value.name || value.id}</td>
+                      <td>{capitalize(value.status)}</td>
+                      <td className="action-row-item">
+                        <button className="btn btn-link" value={value.name} onClick={this.handleRestart}>
+                          <FontAwesomeIcon icon={faSync} />
+                        </button>
+                      </td>
+                    </tr>
+                    )
+                  })
+                  : ('')
+                }
+              </tbody>
+            </Table>
+          </Row>
+          <Row className="mt-2">
+            <h3>Rollups</h3>
+            <Table>
+              <thead>
+                <tr>
+                  <th className="process-row">Process</th>
+                  <th className="status-row">Status</th>
+                  <th className="actions-row">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              {this.props.healthData && this.props.healthData.rollup_processes
+                  ? this.props.healthData.rollup_processes.process_data.map((value, index) => {
+                    return (
+                      <tr key={index}>
+                      <td>{value.name || value.id}</td>
+                      <td>{capitalize(value.status)}</td>
+                      <td className="action-row-item">
+                        <button className="btn btn-link" value={value.name} onClick={this.handleRestart}>
+                          <FontAwesomeIcon icon={faSync} />
+                        </button>
+                      </td>
+                    </tr>
+                    )
+                  })
+                  : ('')
+                }
+              </tbody>
+            </Table>
+          </Row>
+        </Container>
+     </Container>
     );
   }
 }
@@ -156,7 +178,14 @@ class Health extends Component {
 const mapStateToProps = state => ({
   healthData: state.healthReducer.healthData,
   isFetching: state.healthReducer.isFetching,
-  error: state.healthReducer.error
+  error: state.healthReducer.error,
+  alerts: state.alertsReducer.alerts
 });
 
-export default connect(mapStateToProps)(Health);
+const mapActionsToProps = {
+  restartProcess,
+  pushAlert,
+  popAlert
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Health);

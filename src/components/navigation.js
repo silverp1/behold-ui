@@ -4,7 +4,10 @@ import {
   Navbar,
   NavbarToggler,
   NavbarBrand,
-  Container
+  Container,
+  Nav,
+  NavItem,
+  NavLink
 } from 'reactstrap';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -47,6 +50,14 @@ class Navigation extends Component {
               <span className="pl-2">Behold</span>
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleOnClick} />
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/">Checks</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/health">Health</NavLink>
+              </NavItem>
+            </Nav>
           </Container>
         </Navbar>
         <ToastContainer

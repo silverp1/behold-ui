@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import Navigation from '../../components/navigation';
 import { createCheck } from '../../features/checks/actions';
 import { redirectTo } from '../../util/general';
-import { pushAlert, popAlert } from '../../features/alerts/actions';
-import showAlert from '../../util/alerts';
+import { pushAlert } from '../../features/alerts/actions';
 import {
   Button,
   Container,
@@ -17,6 +16,7 @@ import {
   Input,
   FormText
 } from 'reactstrap';
+import showAlert from '../../util/alerts';
 
 class CreateCheck extends Component {
   constructor(props) {
@@ -68,9 +68,9 @@ class CreateCheck extends Component {
     )
 
     if (this.props.error) {
-      this.props.pushAlert(['danger', 'Check create failed'])
-      showAlert(this.props.alerts);
-      this.props.popAlert();
+      await this.props.pushAlert(['danger', 'Check create failed']);
+      showAlert(this.props.alerts)
+      await this.props.popAlert();
     } else {
       redirectTo('/');
     }
@@ -182,9 +182,7 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-  createCheck,
-  pushAlert,
-  popAlert
+  createCheck
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(CreateCheck);

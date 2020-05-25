@@ -9,3 +9,20 @@
   font-size: 32px;
   text-align: center;
 }
+
+.process-row {
+  width: 30%;
+}
+
+.status-row {
+  width: 10%;
+}
+
+.actions-row {
+  width: 60%;
+  text-align: right;
+}
+
+.action-row-item {
+  text-align: right;
+}
