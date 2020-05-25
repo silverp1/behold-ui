@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Navigation from '../../components/navigation';
 import { createCheck } from '../../features/checks/actions';
 import { redirectTo } from '../../util/general';
-import { pushAlert } from '../../features/alerts/actions';
 import {
   Button,
   Container,

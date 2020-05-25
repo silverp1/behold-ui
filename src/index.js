@@ -10,7 +10,7 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 if (getCurrentEnvironment() === 'development') {
- init();
+  init();
 }
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
