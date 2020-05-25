@@ -8,7 +8,7 @@ if(getCurrentEnvironment() === 'development') {
   }
 } else {
   config = {
-    BASE_PATH: process.env.API_URL,
+    BASE_PATH: process.env.REACT_APP_BEHOLD_API_URL || "http://localhost:4000/",
     DATE_FORMAT: 'MM-DD-YY hh:mm:ss'
   }
 }

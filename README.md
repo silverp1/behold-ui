@@ -6,16 +6,18 @@ behold-ui is a react application frontend for the [behold](https://github.com/si
 
 To run this locally, start it like you would any react application:
 
-`npm install`
-`npm start`
+1. `npm install`
+2. `npm start`
 
 You should now see the application running on port 3000. This application will run using pretender if you don't specify a non-development environment. 
 
 ### Use a real instance of behold
 
-You can change to production and, in that mode, you can also specify the `API_URL` to your behold instance:
+By default behold-ui runs in development. You can make it run in "production" by using `REACT_APP_BEHOLD_MODE_OVERRIDE` and setting that to `production`.
 
-`NODE_ENV=production API_URL=localhost:4000/ npm start`
+Furthermore, when you do this you should specify the API URL of the behold instance you want the frontend to talk to using `REACT_APP_BEHOLD_API_URL` otherwise it defaults to `http://localhost:4000/`.
+
+I use a `.env.local` file locally with `REACT_APP_BEHOLD_API_URL` defined, that is used automatically in the event the production mode is enabled.
 
 ## Run it for real
 

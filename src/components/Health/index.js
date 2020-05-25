@@ -89,8 +89,8 @@ class Health extends Component {
     }
   }
 
-  async handleRestart(e) {
-    await this.props.restartProcess(e.target.value);
+  async handleRestart(name) {
+    await this.props.restartProcess(name);
     if (!this.props.error) {
       this.props.pushAlert(['success', 'Process restart request made successfully']);
     } else {
@@ -127,14 +127,14 @@ class Health extends Component {
                       <td>{value.name || value.id}</td>
                       <td>{capitalize(value.status)}</td>
                       <td className="action-row-item">
-                        <button className="btn btn-link" value={value.name} onClick={this.handleRestart}>
+                        <button className="btn btn-link" value={value.name} onClick={() => this.handleRestart(value.name)}>
                           <FontAwesomeIcon icon={faSync} />
                         </button>
                       </td>
                     </tr>
                     )
                   })
-                  : ('')
+                  : (null)
                 }
               </tbody>
             </Table>
@@ -157,14 +157,14 @@ class Health extends Component {
                       <td>{value.name || value.id}</td>
                       <td>{capitalize(value.status)}</td>
                       <td className="action-row-item">
-                        <button className="btn btn-link" value={value.name} onClick={this.handleRestart}>
+                        <button className="btn btn-link" value={value.name} onClick={() => this.handleRestart(value.name)}>
                           <FontAwesomeIcon icon={faSync} />
                         </button>
                       </td>
                     </tr>
                     )
                   })
-                  : ('')
+                  : (null)
                 }
               </tbody>
             </Table>

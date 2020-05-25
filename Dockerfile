@@ -3,10 +3,7 @@ FROM node:13.12.0-alpine
 WORKDIR /app
 
 ENV PATH /app/node_modules/.bin:$PATH
-ENV NODE_ENV production
-
-# Replace with your own
-ENV API_URL http://behold.pettit.home/ 
+ENV REACT_APP_BEHOLD_MODE_OVERRIDE production
 
 COPY package.json ./
 COPY package-lock.json ./
