@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Navigation from '../../components/navigation';
 import Health from '../../components/Health';
 import Loading from '../../components/Loading';
-import { getHealthData } from '../../features/health/actions';
+import { getHealthData, getFailures } from '../../features/health/actions';
 
 class HealthDashboard extends Component {
   constructor(props) {
@@ -14,6 +14,7 @@ class HealthDashboard extends Component {
 
   async componentDidMount() {
     await this.props.getHealthData();
+    await this.props.getFailures();
   }
 
   render() {
@@ -36,7 +37,8 @@ const mapStateToProps = state => ({
 })
 
 const mapActionsToProps = {
-  getHealthData
+  getHealthData,
+  getFailures
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(HealthDashboard);

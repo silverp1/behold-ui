@@ -1,6 +1,7 @@
 import {
   doGetHealthDataRequest,
-  doRestartProcessRequest
+  doRestartProcessRequest,
+  doGetFailuresRequest
 } from './util';
 
 export const GET_HEALTH_DATA_REQUEST = 'getHealthDataRequest';
@@ -10,6 +11,42 @@ export const GET_HEALTH_DATA_ERROR = 'getHealthDataError';
 export const RESTART_PROCESS_REQUEST = 'restartProcessRequest';
 export const RESTART_PROCESS_SUCCESS = 'restartProcessSuccess';
 export const RESTART_PROCESS_ERROR = 'restartProcessError';
+
+export const GET_FAILURES_REQUEST = 'getFailuresRequest';
+export const GET_FAILURES_SUCCESS = 'getFailuresSuccess';
+export const GET_FAILURES_ERROR = 'getFailuresError';
+
+export function getFailuresRequest() {
+  return {
+    type: GET_FAILURES_REQUEST
+  };
+}
+
+export function getFailuresSuccess(data) {
+  return {
+    type: GET_FAILURES_SUCCESS,
+    payload: data
+  };
+}
+
+export function getFailuresError(error) {
+  return {
+    type: GET_FAILURES_ERROR,
+    error: error
+  }
+}
+
+export function getFailures() {
+  return async (dispatch) => {
+    try {
+      dispatch(getFailuresRequest());
+      const result = await doGetFailuresRequest();
+      dispatch(getFailuresSuccess(result.data));
+    } catch (e) {
+      dispatch(getFailuresError(e));
+    }
+  }
+}
 
 export function restartProcessRequest() {
   return {

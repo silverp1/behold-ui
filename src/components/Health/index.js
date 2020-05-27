@@ -169,6 +169,32 @@ class Health extends Component {
               </tbody>
             </Table>
           </Row>
+          <Row className="mt-2">
+            <h3>Recent Failures</h3>
+            <Table>
+              <thead>
+                <tr>
+                  <th>Check Name</th>
+                  <th>Returned Value</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+              {this.props.failures
+                  ? this.props.failures.map((value, index) => {
+                    return (
+                      <tr key={index}>
+                      <td>{value.check.name || value.check.id}</td>
+                      <td>{value.returned_value}</td>
+                      <td>{value.inserted_at}</td>
+                    </tr>
+                    )
+                  })
+                  : (null)
+                }
+              </tbody>
+            </Table>
+          </Row>
         </Container>
      </Container>
     );
@@ -179,6 +205,7 @@ const mapStateToProps = state => ({
   healthData: state.healthReducer.healthData,
   isFetching: state.healthReducer.isFetching,
   error: state.healthReducer.error,
+  failures: state.healthReducer.failures,
   alerts: state.alertsReducer.alerts
 });
 
