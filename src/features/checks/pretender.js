@@ -1,4 +1,13 @@
 export default function() {
+  this.delete(
+    '/api/v1/check',
+    request => [
+      200,
+      { 'Content-Type': 'application/json' },
+      JSON.stringify({ message: "deleted successfully" })
+    ]
+  )
+
   this.get(
     '/api/v1/check/:id/values',
     request => [

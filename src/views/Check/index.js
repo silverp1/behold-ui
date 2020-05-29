@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import Navigation from '../../components/navigation';
 import StatusBar from '../../components/StatusBar';
 import Loading from '../../components/Loading';
-import { getCheck, getCheckValues } from '../../features/checks/actions';
+import { getCheck, getCheckValues, deleteCheck } from '../../features/checks/actions';
 import { pushAlert, popAlert } from '../../features/alerts/actions';
 import { formatDate } from '../../util/general';
 import showAlert from '../../util/alerts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { redirectTo } from '../../util/general';
 import {
   Button,
   Row,
@@ -42,6 +43,17 @@ class Check extends Component {
       return (<FontAwesomeIcon className="text-success" icon={faCheck} />)
     } else {
       return (<FontAwesomeIcon className="text-danger" icon={faTimes} />)
+    }
+  }
+
+  async deleteCheck(checkId) {
+    await this.props.deleteCheck(checkId);
+    if (this.props.error) {
+      await this.props.pushAlert(['danger', 'Check delete failed']);
+      showAlert(this.props.alerts)
+      await this.props.popAlert();
+    } else {
+      redirectTo('/');
     }
   }
 
@@ -103,7 +115,7 @@ class Check extends Component {
                   </Col>
                 </Row>
                 <div className="mb-4">
-                  <Button color="danger">Delete check</Button>
+                  <Button onClick={() => this.deleteCheck(this.props.check.id)} color="danger">Delete check</Button>
                 </div>
                 <h3>Notifications</h3>
                 <Table>
@@ -177,6 +189,7 @@ const mapStateToProps = state => ({
 const mapActionsToProps = {
   getCheck,
   getCheckValues,
+  deleteCheck,
   pushAlert,
   popAlert,
   showAlert

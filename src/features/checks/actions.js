@@ -2,7 +2,8 @@ import {
   allChecksRequest, 
   doCreateCheckRequest,
   doGetCheckRequest,
-  doGetCheckValuesRequest
+  doGetCheckValuesRequest,
+  doDeleteCheckRequest
 } from './util'
 
 export const GET_ALL_CHECKS_REQUEST = 'getAllChecksRequest';
@@ -20,6 +21,42 @@ export const GET_CHECK_ERROR = 'getCheckError';
 export const GET_CHECK_VALUES_REQUEST = 'getCheckValuesRequest';
 export const GET_CHECK_VALUES_SUCCESS = 'getCheckValuesSuccess';
 export const GET_CHECK_VALUES_ERROR = 'getCheckValueError';
+
+export const DELETE_CHECK_REQUEST = 'deleteCheckRequest';
+export const DELETE_CHECK_SUCCESS = 'deleteCheckSuccess';
+export const DELETE_CHECK_ERROR = 'deleteCheckError';
+
+export function deleteCheckRequest() {
+  return {
+    type: DELETE_CHECK_REQUEST
+  };
+}
+
+export function deleteCheckSuccess(data) {
+  return {
+    type: DELETE_CHECK_SUCCESS,
+    payload: data
+  };
+}
+
+export function deleteCheckError(error) {
+  return {
+    type: DELETE_CHECK_ERROR,
+    error: error
+  };
+}
+
+export function deleteCheck(checkId) {
+  return async (dispatch) => {
+    try {
+      dispatch(deleteCheckRequest());
+      const result = await doDeleteCheckRequest(checkId);
+      dispatch(deleteCheckSuccess(result.data));
+    } catch (e) {
+      dispatch(deleteCheckError(e));
+    }
+  }
+}
 
 export function getCheckValuesRequest() {
   return {

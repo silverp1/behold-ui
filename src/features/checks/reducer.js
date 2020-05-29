@@ -10,7 +10,10 @@ import {
   GET_CHECK_ERROR,
   GET_CHECK_VALUES_REQUEST,
   GET_CHECK_VALUES_SUCCESS,
-  GET_CHECK_VALUES_ERROR
+  GET_CHECK_VALUES_ERROR,
+  DELETE_CHECK_REQUEST,
+  DELETE_CHECK_SUCCESS,
+  DELETE_CHECK_ERROR
 } from './actions';
 
 export default function checksReducer(
@@ -24,6 +27,7 @@ export default function checksReducer(
   action
 ) {
   switch(action.type) {
+    case DELETE_CHECK_REQUEST:
     case GET_CHECK_VALUES_REQUEST:
     case GET_CHECK_REQUEST:
     case CREATE_CHECK_REQUEST:
@@ -34,6 +38,7 @@ export default function checksReducer(
         isFetching: true
       };
     case CREATE_CHECK_SUCCESS:
+    case DELETE_CHECK_SUCCESS:
       return {
         ...state,
         isFetching: false,
@@ -61,6 +66,7 @@ export default function checksReducer(
     case CREATE_CHECK_ERROR:
     case GET_ALL_CHECKS_ERROR:
     case GET_CHECK_VALUES_ERROR:
+    case DELETE_CHECK_ERROR:
       return {
         ...state,
         isFetching: false,
