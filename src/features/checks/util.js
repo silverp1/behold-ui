@@ -42,6 +42,7 @@ export const doCreateCheckRequest = async (
     value,
     comparison,
     operation,
-    interval
+    interval,
+    unique_id: `${type}-${target}-${interval}-${name}`
   }
 });
