@@ -124,6 +124,7 @@ class Check extends Component {
                 </Row>
                 <div className="mb-4">
                   <Button onClick={() => this.deleteCheck(this.props.check.id)} color="danger">Delete check</Button>
+                  <a href={`/check/${this.props.check.id}/update`} className="btn btn-primary ml-2">Update check</a>
                 </div>
                 <h3>Notifications</h3>
                 <Table>

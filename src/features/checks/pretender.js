@@ -8,6 +8,15 @@ export default function() {
     ]
   )
 
+  this.put(
+    '/api/v1/check',
+    request => [
+      200,
+      { 'Content-Type': 'application/json' },
+      JSON.stringify({ message: "updated successfully" })
+    ]
+  )
+
   this.get(
     '/api/v1/check/:id/values',
     request => [

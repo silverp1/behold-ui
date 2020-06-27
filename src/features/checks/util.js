@@ -48,3 +48,24 @@ export const doCreateCheckRequest = async (
     unique_id: `${type}-${target}-${interval}-${name}`
   }
 });
+
+  export const doUpdateCheckRequest = async (
+    name, type, target, value, 
+    comparison, operation, interval,
+    threshold, id
+  ) => axios({
+    method: 'PUT',
+    baseURL: config.BASE_PATH,
+    url: 'api/v1/check',
+    data: {
+      name,
+      type,
+      target,
+      value,
+      comparison,
+      operation,
+      interval,
+      threshold,
+      id
+    }
+});

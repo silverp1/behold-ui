@@ -3,7 +3,8 @@ import {
   doCreateCheckRequest,
   doGetCheckRequest,
   doGetCheckValuesRequest,
-  doDeleteCheckRequest
+  doDeleteCheckRequest,
+  doUpdateCheckRequest
 } from './util'
 
 export const GET_ALL_CHECKS_REQUEST = 'getAllChecksRequest';
@@ -26,6 +27,49 @@ export const DELETE_CHECK_REQUEST = 'deleteCheckRequest';
 export const DELETE_CHECK_SUCCESS = 'deleteCheckSuccess';
 export const DELETE_CHECK_ERROR = 'deleteCheckError';
 
+export const UPDATE_CHECK_REQUEST = 'updateCheckRequest';
+export const UPDATE_CHECK_SUCCESS = 'updateCheckSuccess';
+export const UPDATE_CHECK_ERROR = 'updateCheckError';
+
+export function updateCheckRequest() {
+  return {
+    type: UPDATE_CHECK_REQUEST
+  };
+}
+
+export function updateCheckSuccess(data) {
+  return {
+    type: UPDATE_CHECK_SUCCESS,
+    payload: data
+  };
+}
+
+export function updateCheckError(error) {
+  return {
+    type: UPDATE_CHECK_ERROR,
+    payload: error
+  };
+}
+
+export function updateCheck(
+  name, type, target, value, 
+  comparison, operation, interval,
+  threshold, id
+) {
+  return async (dispatch) => {
+    try {
+      dispatch(updateCheckRequest());
+      const result = await doUpdateCheckRequest(
+        name, type, target, value,
+        comparison, operation, parseInt(interval),
+        parseInt(threshold), id
+      );
+      dispatch(updateCheckSuccess(result.data));
+    } catch (e) {
+      dispatch(updateCheckError(e))
+    }
+  }
+}
 export function deleteCheckRequest() {
   return {
     type: DELETE_CHECK_REQUEST
