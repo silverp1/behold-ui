@@ -109,6 +109,7 @@ export default function() {
             "inserted_at": "2020-05-03T02:12:55",
             "id": 9,
             "comparison": null,
+            "threshold": 3,
             "alerts": [
               {
                   "updated_at": "2020-05-14T05:31:39",
@@ -153,6 +154,7 @@ export default function() {
           "interval": 6000,
           "inserted_at": "2020-05-09T03:42:42",
           "id": 10,
+          "threshold": 3,
           "comparison": "$last_30_minutes",
           "alerts": []
         },
@@ -168,6 +170,7 @@ export default function() {
           "interval": 6000,
           "inserted_at": "2020-05-09T03:42:42",
           "id": 11,
+          "threshold": 3,
           "comparison": null,
           "alerts": [
             {
@@ -194,6 +197,7 @@ export default function() {
             "interval": 6000,
             "inserted_at": "2020-05-03T02:12:55",
             "id": 9,
+            "threshold": 3,
             "comparison": null,
             "alerts": []
         }

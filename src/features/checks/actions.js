@@ -144,14 +144,16 @@ export function createCheckError(error) {
 
 export function createCheck(
   name, type, target, value, 
-  comparison, operation, interval
+  comparison, operation, interval,
+  threshold
 ) {
   return async (dispatch) => {
     try {
       dispatch(createCheckRequest());
       const result = await doCreateCheckRequest(
         name, type, target, value,
-        comparison, operation, parseInt(interval)
+        comparison, operation, parseInt(interval),
+        parseInt(threshold)
       );
       dispatch(createCheckSuccess(result.data));
     } catch (e) {

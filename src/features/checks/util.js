@@ -30,7 +30,8 @@ export const allChecksRequest = async () => axios({
 
 export const doCreateCheckRequest = async (
   name, type, target, value, 
-  comparison, operation, interval
+  comparison, operation, interval,
+  threshold
 ) => axios({
   method: 'POST',
   baseURL: config.BASE_PATH,
@@ -43,6 +44,7 @@ export const doCreateCheckRequest = async (
     comparison,
     operation,
     interval,
+    threshold,
     unique_id: `${type}-${target}-${interval}-${name}`
   }
 });

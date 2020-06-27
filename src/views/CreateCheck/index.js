@@ -45,6 +45,7 @@ class CreateCheck extends Component {
     let comparison;
     let interval;
     let operation;
+    let threshold;
 
     // DOM is changed based on type selection
     // meaning sometimes the indices are different
@@ -52,8 +53,10 @@ class CreateCheck extends Component {
       comparison = e.target[4].value;
       operation = e.target[5].value;
       interval = e.target[6].value;
+      threshold = e.target[7].value;
     } else {
       interval = e.target[4].value;
+      threshold = e.target[5].value;
     }
 
     await this.props.createCheck(
@@ -63,7 +66,8 @@ class CreateCheck extends Component {
       value,
       comparison,
       operation,
-      interval
+      interval,
+      threshold
     )
 
     if (this.props.error) {
@@ -162,6 +166,13 @@ class CreateCheck extends Component {
                   </Input>
                   <FormText color="muted">
                     How often the check should be completed.
+                  </FormText>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="threshold">Threshold</Label>
+                  <Input type="number" name="threshold" id="threshold" />
+                  <FormText color="muted">
+                    How many failed checks should occur before you are alerted for a state change.
                   </FormText>
                 </FormGroup>
                 <Button className="btn btn-primary" type="submit">Create check</Button>

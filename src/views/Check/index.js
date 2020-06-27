@@ -84,6 +84,10 @@ class Check extends Component {
                         <span className="float-right">{this.props.check.state}</span>
                       </ListGroupItem>
                       <ListGroupItem>
+                        <strong>Interval</strong>
+                        <span className="float-right">{this.props.check.interval / 60000} minutes</span>
+                      </ListGroupItem>
+                      <ListGroupItem>
                         <strong>Check Process Status</strong>
                         <span className="float-right">
                           {this.props.check.processes ? this.getProcessIcon(this.props.check.processes.check_running) : "Unknown"}
@@ -104,6 +108,10 @@ class Check extends Component {
                       <ListGroupItem>
                         <strong>Check Created</strong>
                         <span className="float-right">{formatDate(this.props.check.inserted_at)}</span>
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        <strong>Threshold</strong>
+                        <span className="float-right">{this.props.check.threshold}</span>
                       </ListGroupItem>
                       <ListGroupItem>
                         <strong>Rollup Process Status</strong>
