@@ -26,12 +26,12 @@ export function createNotificationError(error) {
   };
 }
 
-export function createNotification(checkId, type, target, interval) {
+export function createNotification(checkId, type, target) {
   return async (dispatch) => {
     try {
       dispatch(createNotificationRequest());
       const result = await doCreateNotificationRequest(
-        parseInt(checkId), type, target, parseInt(interval)
+        parseInt(checkId), type, target
       )
       dispatch(createNotificationSuccess(result.data));
     } catch (e) {

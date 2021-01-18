@@ -2,7 +2,7 @@ import axios from 'axios';
 import config from '../../config/app';
 
 export const doCreateNotificationRequest = async (
-  checkId, type, target, interval
+  checkId, type, target
 ) => axios({
   method: 'POST',
   baseURL: config.BASE_PATH,
@@ -10,7 +10,6 @@ export const doCreateNotificationRequest = async (
   data: {
     check_id: checkId,
     type,
-    target,
-    interval
+    target
   }
 });
