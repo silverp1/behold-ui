@@ -37,7 +37,7 @@ class CreateNotification extends Component {
     e.preventDefault();
 
     let type = e.target[0].value;
-    let target = e.target[1].value;  d
+    let target = e.target[1].value;
 
     await this.props.createNotification(
       this.checkId,
